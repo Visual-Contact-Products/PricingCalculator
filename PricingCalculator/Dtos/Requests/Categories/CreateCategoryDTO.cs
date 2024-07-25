@@ -7,7 +7,5 @@ namespace PricingCalculator.Dtos.Requests.Categories
     {
         [StringLength(100, ErrorMessage = "The field {0} has a max length of {1} characters ")]
         public string Name { get; set; } = null!;
-        [StringLength(10, ErrorMessage = "The field {0} has a max length of {1} characters ")]
-        public string UnitName { get; set; } = null!;
     }
 }

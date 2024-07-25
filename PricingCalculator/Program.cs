@@ -15,7 +15,6 @@ using PricingCalculator.Models;
 using PricingCalculator.Services.AuthServices;
 using PricingCalculator.Services.CategoryServices;
 using PricingCalculator.Services.ProductServices;
-using PricingCalculator.Services.RoleServices;
 using PricingCalculator.Services.TokenServices;
 using PricingCalculator.Services.UserServices;
 using System.Text;
@@ -91,7 +90,6 @@ builder.Services.Configure<DataProtectionTokenProviderOptions>(
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IGetUserInfo, GetUserInfo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
