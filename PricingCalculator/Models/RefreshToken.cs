@@ -1,0 +1,9 @@
+﻿namespace PricingCalculator.Models
+{
+    public class RefreshToken
+    {
+        public Guid Id { get; set; }
+        public required string Token { get; set; }
+        public string UserId { get; set; }
+    }
+}
