@@ -34,6 +34,15 @@ namespace User.Microservice.Services.TokenServices
                 new(ClaimTypes.Email, user.Email!)
             };
 
+            var roles = await _userService.GetRoles(user);
+            if (roles.IsSuccess && roles.Value != null)
+            {
+                foreach (var role in roles.Value)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
+            }
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("Jwt:Key").Value!));
 
             var token = new JwtSecurityToken(

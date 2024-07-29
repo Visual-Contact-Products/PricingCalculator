@@ -32,7 +32,7 @@ namespace PricingCalculator.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Administrator")]
         public async Task<IActionResult> CreateCategory(CreateCategoryDTO createCategoryDTO)
         {
             var result = await _categoryService.CreateCategory(createCategoryDTO);

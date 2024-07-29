@@ -323,5 +323,13 @@ namespace PricingCalculator.Services.UserServices
 
             return Result<string, Error>.Success();
         }
+
+        public async Task<Result<IEnumerable<string>, Error>> GetRoles(PricingCalculator.Models.User user)
+        {
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            return Result<IEnumerable<string>, Error>.Success(userRoles);
+        }
     }
 }

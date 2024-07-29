@@ -28,7 +28,7 @@ namespace PricingCalculator.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Administrator")]
         public async Task<IActionResult> CreateProduct(CreateProductDTO createProductDTO)
         {
             var result = await _productService.CreateProduct(createProductDTO);

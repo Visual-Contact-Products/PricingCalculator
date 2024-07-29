@@ -18,5 +18,6 @@ namespace PricingCalculator.Services.UserServices
         Task<Result<string, Error>> ChangePassword(string id, ChangePasswordRequest changePasswordRequest);
         Task<Result<string, Error>> ForgotPassword(string email);
         Task<Result<string, Error>> ResetPassword(string userId, string token, ResetPasswordRequest resetPasswordRequest);
+        Task<Result<IEnumerable<string>, Error>> GetRoles(PricingCalculator.Models.User user);
     }
 }

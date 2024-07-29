@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
 using PricingCalculator.Services.UserServices;
 using PricingCalculator.Dtos.Requests.Users;
 
@@ -15,7 +14,7 @@ namespace PricingCalculator.Controllers
     {
         private readonly IUserService _userService = userService;
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Administrator")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest createUserRequest)
         {
             if (!ModelState.IsValid)
@@ -80,7 +79,7 @@ namespace PricingCalculator.Controllers
         }
 
         // DELETE: api/users/5
-        [HttpDelete("{id}"), Authorize(Roles = "SuperAdministrator")]
+        [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _userService.GetUserById(id);
