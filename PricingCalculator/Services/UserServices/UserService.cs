@@ -260,10 +260,17 @@ namespace PricingCalculator.Services.UserServices
                 Content = $"<h1> Welcome {user.UserName} </h1> <p>Your password is: {generatedPassword}</p>"
             };
 
-            // Call the email microservice to send the email
-            await _emailClient.SendEmailAsync(message);
+            try
+            {
+                // Call the email microservice to send the email
+                await _emailClient.SendEmailAsync(message);
 
-            return Result<string, Error>.Success();
+                return Result<string, Error>.Success();
+            }
+            catch (Exception ex)
+            {
+                return Result<string, Error>.Failure(Errors.EmailCanNotBeSended);
+            }
         }
 
         private async Task<Result<string, Error>> SendForgotPasswordEmail(PricingCalculator.Models.User user)

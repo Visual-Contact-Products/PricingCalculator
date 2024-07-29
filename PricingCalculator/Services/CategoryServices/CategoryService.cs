@@ -7,9 +7,8 @@ using PricingCalculator.Models.Results;
 
 namespace PricingCalculator.Services.CategoryServices
 {
-    public class CategoryService(DataContext context, IUnitOfWork unitOfWork) : ICategoryService
+    public class CategoryService(IUnitOfWork unitOfWork) : ICategoryService
     {
-        private readonly DataContext _context = context;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public async Task<Result<Category, Error>> CreateCategory(CreateCategoryDTO createCategoryDTO)
@@ -33,9 +32,8 @@ namespace PricingCalculator.Services.CategoryServices
         {
             try
             {
-                var categories = await _context.Categories
-                                .Include(c => c.Products)
-                                .ToListAsync();
+                var categories = await _unitOfWork.CategoryRepository
+                    .GetAllCategoriesWithProducts();
 
                 return categories;
             }
@@ -48,12 +46,20 @@ namespace PricingCalculator.Services.CategoryServices
 
         public async Task<Result<Category, Error>> GetCategoryById(int id)
         {
-            var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
+            try
+            {
+                var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
 
-            if (category is null)
-                return Result<Category, Error>.Failure(Errors.CategoryNotFound);
+                if (category is null)
+                    return Result<Category, Error>.Failure(Errors.CategoryNotFound);
 
-            return category;
+                return category;
+            }
+            catch
+            {
+                return Result<Category, Error>.Failure(Errors.ServerError);
+            }
+
         }
     }
 }
