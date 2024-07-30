@@ -133,12 +133,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<DataContext>();  // Only use in development
-    context.Database.Migrate();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var context = services.GetRequiredService<DataContext>();  // Only use in development
+//    context.Database.Migrate();
+//}
 
 app.UseHttpsRedirection();
 

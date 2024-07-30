@@ -51,33 +51,6 @@ namespace PricingCalculator.Controllers
             return Ok(user);
         }
 
-        // PUT: api/users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, UpdateUserRequest updateRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = await _userService.GetUserById(id);
-
-            if (!user.IsSuccess || user.Value == null)
-            {
-                return StatusCode(user.Errors[0].HttpStatusCode, user);
-            }
-
-            var result = await _userService.UpdateUser(updateRequest, user.Value);
-
-            if (!result.IsSuccess)
-            {
-                return StatusCode(result.Errors[0].HttpStatusCode, result);
-            }
-
-            return Ok(result);
-        }
-
         // DELETE: api/users/5
         [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteUser(string id)

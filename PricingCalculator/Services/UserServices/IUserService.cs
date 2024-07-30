@@ -10,7 +10,6 @@ namespace PricingCalculator.Services.UserServices
     {
         Task<Result<IEnumerable<PricingCalculator.Models.User>, Error>> GetAllUsers();
         Task<Result<PricingCalculator.Models.User, Error>> GetUserById(string id);
-        Task<Result<string, Error>> UpdateUser(UpdateUserRequest updateUserRequest, PricingCalculator.Models.User user);
         Task<Result<string, Error>> CreateUser(CreateUserRequest user);
         Task<Result<string, Error>> DeleteUser(PricingCalculator.Models.User user);
         Task<Result<PricingCalculator.Models.User, Error>> FindUserByEmail(string email);

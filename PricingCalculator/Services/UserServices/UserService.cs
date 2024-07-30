@@ -86,23 +86,6 @@ namespace PricingCalculator.Services.UserServices
             return Result<PricingCalculator.Models.User, Error>.Success(user);
         }
 
-        public async Task<Result<string, Error>> UpdateUser(UpdateUserRequest updateUserRequest, PricingCalculator.Models.User user)
-        {
-            _ = updateUserRequest.ToModel(user);
-
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                // Map IdentityError to Error type
-                var errors = result.Errors
-                    .Select(error => new Error(error.Code, error.Description)).ToList();
-
-                return Result<string, Error>.Failure(errors);
-            }
-
-            return Result<string, Error>.Success();
-        }
-
         public async Task<Result<string, Error>> CreateUser(CreateUserRequest user)
         {
             await _unitOfWork.BeginTransactionAsync();
