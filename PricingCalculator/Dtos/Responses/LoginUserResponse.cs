@@ -7,5 +7,6 @@ namespace PricingCalculator.Dtos.Responses
         public string? Id { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
+        public bool? IsFirstLogin { get; set; }
     }
 }

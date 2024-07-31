@@ -9,7 +9,7 @@ namespace PricingCalculator.Dtos.Responses.Authentication
         public string? Id { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
-
+        public bool? IsFirstLogin { get; set; }
         public LoginResponse()
         {
         }
@@ -18,13 +18,15 @@ namespace PricingCalculator.Dtos.Responses.Authentication
                              string? refreshToken,
                              string? id,
                              string? userName,
-                             string? email)
+                             string? email,
+                             bool? isFirstLogin)
         {
             AccessToken = accessToken;
             RefreshToken = refreshToken;
             Id = id;
             UserName = userName;
             Email = email;
+            IsFirstLogin = isFirstLogin;
         }
     }
 }

@@ -48,7 +48,8 @@ namespace PricingCalculator.Services.AuthServices
                 tokenProcesor.RefreshToken,
                 loginUserResponse.Id,
                 loginUserResponse.UserName,
-                loginUserResponse.Email);
+                loginUserResponse.Email,
+                loginUserResponse.IsFirstLogin);
 
             return Result<LoginResponse, Error>.Success(response);
         }

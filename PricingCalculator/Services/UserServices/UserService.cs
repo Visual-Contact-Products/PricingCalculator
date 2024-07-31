@@ -180,6 +180,12 @@ namespace PricingCalculator.Services.UserServices
                 return Result<string, Error>.Failure(errors);
             }
 
+            if (user.Value.IsFirstLogin == true)
+            {
+                user.Value.IsFirstLogin = false;
+                _ = await _userManager.UpdateAsync(user.Value);
+            }
+
             return Result<string, Error>.Success();
         }
 
